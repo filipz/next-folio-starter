@@ -1,13 +1,19 @@
+/* 1. Tailwind Directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 2. Root Configurations */
+html {
+  min-width: 360px;
+}
 
 ::selection {
   background-color: #47a3f3;
   color: #fefefe;
 }
 
-/* Light theme colors */
+/* 3. Theme Variables */
 :root {
   --sh-class: #2d5e9d;
   --sh-identifier: #354150;
@@ -20,7 +26,6 @@
   --sh-entity: #e25a1c;
 }
 
-/* Dark theme colors */
 .dark {
   background-color: #121212;
   --sh-class: #4c97f8;
@@ -34,10 +39,52 @@
   --sh-entity: #e25a1c;
 }
 
-html {
-  min-width: 360px;
+/* 4. Lenis Smooth Scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
 }
 
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* 5. Dynamic Viewport Utilities */
+@layer utilities {
+  .h-dynamic {
+    height: calc(var(--vh) * 100);
+  }
+  
+  .w-dynamic {
+    width: calc(var(--vw) * 100);
+  }
+
+  .h-dynamic-1\/2 {
+    height: calc(var(--vh) * 50);
+  }
+
+  .w-dynamic-1\/2 {
+    width: calc(var(--vw) * 50);
+  }
+
+  .min-h-dynamic {
+    min-height: calc(var(--vh) * 100);
+  }
+
+  .max-h-dynamic {
+    max-height: calc(var(--vh) * 100);
+  }
+}
+
+/* 6. Prose Styles */
 .prose {
   @apply text-[#333333] dark:text-[#D4D4D4];
 }
@@ -72,6 +119,7 @@ html {
   @apply visible;
 }
 
+/* 7. Code Block Styles */
 .prose pre {
   @apply bg-[#F7F7F7] dark:bg-[#181818] rounded-lg overflow-x-auto;
 }
@@ -90,8 +138,8 @@ html {
   @apply font-medium;
 }
 
+/* 8. Typography & Media */
 .prose img {
-  /* Don't apply styles to next/image */
   @apply m-0;
 }
 
@@ -108,21 +156,20 @@ h6 {
 }
 
 .prose > :first-child {
-  /* Override removing top margin, causing layout shift */
   margin-top: 1.25em !important;
   margin-bottom: 1.25em !important;
 }
 
+/* 9. Utility Classes & Fixes */
 pre::-webkit-scrollbar {
   display: none;
 }
 
 pre {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-/* Remove Safari input shadow on mobile */
 input[type="text"],
 input[type="email"] {
   -webkit-appearance: none;
@@ -130,16 +177,16 @@ input[type="email"] {
   appearance: none;
 }
 
-.prose .tweet a {
-  text-decoration: inherit;
-  font-weight: 500;
-}
-
 table {
   display: block;
   max-width: fit-content;
   overflow-x: auto;
   white-space: nowrap;
+}
+
+.prose .tweet a {
+  text-decoration: inherit;
+  font-weight: 500;
 }
 
 .prose .callout > p {
