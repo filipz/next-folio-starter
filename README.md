@@ -36,7 +36,7 @@ Next Folio Starter uses [pnpm](https://pnpm.io/installation) for dependency mana
 Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [pnpm](https://pnpm.io/installation) to bootstrap the example:
 
 ```
-pnpm create next-app --example [https://github.com/filipz/next-folio-starter](https://github.com/filipz/next-folio-starter) my-portfolio
+pnpm create next-app --example https://github.com/filipz/next-folio-starter my-portfolio
 ```
 
 Start the development server:
