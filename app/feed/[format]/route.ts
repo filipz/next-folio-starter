@@ -1,5 +1,5 @@
 import { Feed } from "feed";
-import { getBlogPosts } from "app/lib/posts";
+import { getBlogPosts } from "lib/posts";
 import { metaData } from "app/config";
 import { NextResponse } from "next/server";
 

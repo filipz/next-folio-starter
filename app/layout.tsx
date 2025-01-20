@@ -1,13 +1,14 @@
-import "./global.css";
-import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
-import { Navbar } from "./components/nav";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import Footer from "./components/footer";
-import { ThemeProvider } from "./components/theme-switch";
-import { metaData } from "./config";
+import "./globals.css"
+import type { Metadata } from "next"
+import { GeistSans } from "geist/font/sans"
+import { GeistMono } from "geist/font/mono"
+import { Navbar } from "./components/nav"
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import Footer from "./components/footer"
+import { ThemeProvider } from "./components/theme-switch"
+import { LenisProvider } from "./providers/lenis-provider"
+import { metaData } from "./config"
 
 export const metadata: Metadata = {
   metadataBase: new URL(metaData.baseUrl),
@@ -43,53 +44,33 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
-};
+}
 
-const cx = (...classes) => classes.filter(Boolean).join(" ");
+const cx = (...classes: string[]) => classes.filter(Boolean).join(" ")
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={cx(GeistSans.variable, GeistMono.variable)}>
-      <head>
-        <link
-          rel="alternate"
-          type="application/rss+xml"
-          href="/rss.xml"
-          title="RSS Feed"
-        />
-        <link
-          rel="alternate"
-          type="application/atom+xml"
-          href="/atom.xml"
-          title="Atom Feed"
-        />
-        <link
-          rel="alternate"
-          type="application/feed+json"
-          href="/feed.json"
-          title="JSON Feed"
-        />
-      </head>
-      <body className="antialiased flex flex-col items-center justify-center mx-auto mt-2 lg:mt-8 mb-20 lg:mb-40">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <main className="flex-auto min-w-0 mt-2 md:mt-6 flex flex-col px-6 sm:px-4 md:px-0 max-w-[640px] w-full">
-            <Navbar />
-            {children}
-            <Footer />
-            <Analytics />
-            <SpeedInsights />
-          </main>
+    <html lang="en" suppressHydrationWarning className={cx(GeistSans.variable, GeistMono.variable)}>
+      <body
+        suppressHydrationWarning
+        className="antialiased flex flex-col items-center justify-center mx-auto mt-2 lg:mt-8 mb-20 lg:mb-40"
+      >
+        <ThemeProvider>
+          <LenisProvider>
+            <main className="flex-auto min-w-0 mt-2 md:mt-6 flex flex-col px-6 sm:px-4 md:px-0 max-w-[640px] w-full">
+              <Navbar />
+              {children}
+              <Footer />
+              <Analytics />
+              <SpeedInsights />
+            </main>
+          </LenisProvider>
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }

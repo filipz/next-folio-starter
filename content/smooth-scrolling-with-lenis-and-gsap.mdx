@@ -1,0 +1,172 @@
+---
+title: "Smooth Scrolling with Lenis and GSAP in Next.js"
+publishedAt: "2025-01-20"
+summary: "Learn how to implement butter-smooth scrolling with Lenis and GSAP animations in your Next.js application."
+tags: "Next.js, Animation, Performance"
+---
+
+Smooth scrolling can significantly enhance user experience, especially when combined with scroll-triggered animations. Let's explore how to integrate Lenis smooth scrolling with GSAP in a Next.js application.
+
+## Installation
+
+First, install the required packages:
+
+```
+pnpm add @studio-freight/react-lenis gsap
+```
+
+## Basic Setup
+
+Create a Lenis provider that will wrap your application:
+
+```
+"use client"
+
+import { ReactLenis } from "@studio-freight/react-lenis"
+import { useEffect, useRef } from "react"
+import { gsap } from "gsap"
+
+interface LenisProviderProps {
+  children: React.ReactNode
+}
+
+export function LenisProvider({ children }: LenisProviderProps) {
+  const lenisRef = useRef(null)
+
+  useEffect(() => {
+    function update(time: number) {
+      if (lenisRef.current) {
+        const lenis = (lenisRef.current as any).lenis
+        if (lenis?.raf) {
+          lenis.raf(time * 1000)
+        }
+      }
+    }
+
+    gsap.ticker.add(update)
+
+    return () => {
+      gsap.ticker.remove(update)
+    }
+  }, [])
+
+  return (
+    <div className="contents">
+      <ReactLenis ref={lenisRef} root autoRaf={false}>
+        {children}
+      </ReactLenis>
+    </div>
+  )
+}
+```
+
+## Integration with Next.js
+
+Update your root layout to include the Lenis provider:
+
+```
+import { LenisProvider } from "@/app/providers/lenis-provider"
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body>
+        <LenisProvider>
+          {children}
+        </LenisProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+## Using Lenis with GSAP Animations
+
+Here's how to create scroll-triggered animations that work smoothly with Lenis:
+
+```
+"use client"
+
+import { useRef } from "react"
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useLenis } from "@studio-freight/react-lenis"
+
+gsap.registerPlugin(ScrollTrigger)
+
+export function AnimatedSection() {
+  const containerRef = useRef(null)
+
+  // Optional: Use Lenis scroll position
+  useLenis(({ scroll }) => {
+    // This callback runs on every scroll
+    console.log("Scroll position:", scroll)
+  })
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".animate-me", {
+        opacity: 0,
+        y: 100,
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: ".animate-me",
+          start: "top bottom-=100",
+          end: "top center",
+          scrub: true,
+        },
+      })
+    }, containerRef)
+
+    return () => ctx.revert()
+  }, [])
+
+  return (
+    <div ref={containerRef}>
+      <div className="animate-me">Smooth scroll</div>
+      <div className="animate-me">With GSAP animations</div>
+      <div className="animate-me">Just works!</div>
+    </div>
+  )
+}
+```
+
+## Advanced Configuration
+
+You can customize Lenis behavior through options:
+
+```
+<ReactLenis
+  root
+  options={{
+    lerp: 0.1, // Linear interpolation (0-1)
+    duration: 1.5, // Scroll duration
+    smoothWheel: true, // Enable smooth scrolling for mouse wheel
+    wheelMultiplier: 1, // Mouse wheel multiplier
+    touchMultiplier: 2, // Touch multiplier
+    infinite: false, // Enable infinite scrolling
+  }}
+>
+  {children}
+</ReactLenis>
+```
+
+## Performance Considerations
+
+1. Use `useRef` and `gsap.context()` for proper cleanup of GSAP animations
+2. Set `autoRaf: false` and use GSAP's ticker for better performance
+3. Keep animations simple and use `will-change` CSS property judiciously
+4. Test on mobile devices to ensure smooth performance
+
+## Conclusion
+
+Lenis and GSAP work together seamlessly to create smooth, performant scroll experiences in Next.js applications. The key is proper initialization and cleanup of both libraries, along with careful consideration of performance implications.
+
+Remember to check out the [Lenis documentation](https://github.com/studio-freight/lenis) and [GSAP documentation](https://greensock.com/docs/) for more advanced features and options. For React-specific implementations, refer to the [GSAP React guide](https://gsap.com/resources/React/) and [React Lenis documentation](https://www.npmjs.com/package/@studio-freight/react-lenis) which provide detailed examples and best practices for integrating these libraries in React applications.
+
+This blog post provides a comprehensive guide to integrating Lenis with GSAP in a Next.js application, following the same structure as your existing blog post while focusing on the specific implementation details of smooth scrolling and animations.
+

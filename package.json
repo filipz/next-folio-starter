@@ -1,19 +1,31 @@
 {
+  "name": "next-folio-starter",
+  "version": "1.0.0",
   "private": true,
+  "description": "A clean, fast portfolio starter with Lenis smooth scrolling and GSAP animations, based on Nextfolio",
+  "author": "Filip Zrnzevic",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/filipz/next-folio-starter"
+  },
+  "credits": {
+    "original": "https://github.com/1msirius/Nextfolio"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
+    "@studio-freight/react-lenis": "^0.0.47",
     "@types/node": "22.10.7",
-    "@types/react": "19.0.7",
-    "@types/react-dom": "19.0.3",
     "@vercel/analytics": "^1.4.1",
     "@vercel/speed-insights": "^1.1.0",
     "feed": "^4.2.2",
     "geist": "1.3.1",
+    "gsap": "^3.12.7",
     "katex": "^0.16.20",
     "next": "^15.1.4",
     "next-mdx-remote": "^5.0.0",
@@ -31,6 +43,8 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",
+    "@types/react": "19.0.7",
+    "@types/react-dom": "19.0.3",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.5.1",
     "tailwindcss": "3.4.17"

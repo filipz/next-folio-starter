@@ -1,14 +1,16 @@
-# Nextfolio
+# Next Folio Starter
 
 A clean, fast, and lightweight portfolio template built with [Next.js](https://nextjs.org/), [Vercel](https://vercel.com/), and [Tailwind CSS](https://tailwindcss.com/).
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2F1msirius%2FNextfolio)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ffilipz%2Fnext-folio-starter)
 
 ## Technologies Used
 
 - Framework: [Next.js](https://nextjs.org/)
 - Typography: [Vercel Geist Font](https://vercel.com/font)
 - Styling: [Tailwind CSS](https://tailwindcss.com/)
+- Animations: [GSAP](https://gsap.com/)
+- Smooth Scroll: [Lenis](https://github.com/studio-freight/lenis)
 - Analytics: [Vercel Web Analytics](https://vercel.com/docs/speed-insights) and [Speed Insights](https://vercel.com/docs/speed-insights)
 - Deployment: [Vercel](https://vercel.com/)
 
@@ -24,15 +26,17 @@ A clean, fast, and lightweight portfolio template built with [Next.js](https://n
 - **Interactive Embeds**: Easily embed interactive tweets and YouTube videos.
 - **Captions**: Add descriptive captions to photos, tweets, and videos.
 - **Image Grid**: Easily showcase image galleries or photos.
+- **Smooth Scrolling**: Integrated [Lenis](https://github.com/studio-freight/lenis) for butter-smooth scrolling.
+- **GSAP Animations**: Added [GSAP](https://gsap.com/) support for advanced animations.
 
 ## Installation
 
-Nextfolio uses [pnpm](https://pnpm.io/installation) for dependency management, so ensure it is installed on your system.
+Next Folio Starter uses [pnpm](https://pnpm.io/installation) for dependency management, so ensure it is installed on your system.
 
 Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [pnpm](https://pnpm.io/installation) to bootstrap the example:
 
 ```
-pnpm create next-app --example https://github.com/1msirius/Nextfolio my-portfolio
+pnpm create next-app --example [https://github.com/filipz/next-folio-starter](https://github.com/filipz/next-folio-starter) my-portfolio
 ```
 
 Start the development server:
@@ -55,6 +59,10 @@ For more information about configuration, follow the instructions in the [Gettin
 
 Contributions are welcome! To get involved, just push your code to the repo. Whether you're enhancing existing features or adding new ones, your efforts are greatly appreciated!
 
-## Licence
+## Credits
 
-Nextfolio is open-source and released under the MIT License.
+This project is based on [Nextfolio](https://github.com/1msirius/Nextfolio) by [1msirius](https://github.com/1msirius), enhanced with additional features and optimizations.
+
+## License
+
+Released under the MIT License. See [LICENSE](LICENSE) for more information.
