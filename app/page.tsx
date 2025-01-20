@@ -1,7 +1,26 @@
+'use client'
+import { useRef } from "react"
+import { gsap, useGSAP } from "@/lib/gsap"
 import Image from "next/image"
 import { socialLinks } from "./config"
 
 export default function Page() {
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {
+    if (!contentRef.current) return
+    const paragraphs = contentRef.current.querySelectorAll('p')
+    
+    // Animate
+    gsap.to(paragraphs, {
+      opacity: 1,
+      y: 0,
+      stagger: 0.2,
+      duration: 0.5,
+      ease: "power2.out"
+    })
+   }, { scope: contentRef })
+
   return (
     <section>
       <a href={socialLinks.twitter} target="_blank">
@@ -18,14 +37,14 @@ export default function Page() {
       <h1 className="mb-8 text-2xl font-medium tracking-tight">
         Next Folio Starter
       </h1>
-      <div className="prose prose-neutral dark:prose-invert">
+      <div ref={contentRef} className="prose prose-neutral dark:prose-invert">
         <p>
-          A clean, fast portfolio starter with smooth scrolling and animations, built with Next.js,
-          Vercel, and Tailwind CSS.
+          A clean, fast portfolio starter with smooth scrolling and animations,
+          built with Next.js, Vercel, and Tailwind CSS.
         </p>
         <p>
-          Next Folio Starter includes everything you need: MDX blog, SEO, RSS feeds, analytics, 
-          smooth scrolling with Lenis, GSAP animations, and{" "}
+          Next Folio Starter includes everything you need: MDX blog, SEO, RSS
+          feeds, analytics, smooth scrolling with Lenis, GSAP animations, and{" "}
           <a
             target="_blank"
             href="https://github.com/filipz/next-folio-starter?tab=readme-ov-file#features"
@@ -65,5 +84,5 @@ export default function Page() {
         </p>
       </div>
     </section>
-  )
+  );
 }
